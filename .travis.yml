@@ -1,0 +1,17 @@
+language: python
+python:
+  - "3.6"
+
+branches:
+  only:
+  - master
+
+# command to install dependencies
+install:
+  - make requirements
+
+# command to run tests
+script:
+  - kenza login --auth-token=$AUTH_TOKEN
+  - git checkout $TRAVIS_BRANCH
+  - make all_kenza_venv job_name=$TRAVIS_COMMIT project_id=$PROJECT_ID
