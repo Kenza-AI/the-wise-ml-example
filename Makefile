@@ -1,4 +1,4 @@
-.PHONY: all all_kenza_docker all_kenza_venv clean data features lint requirements sync_data_to_s3 sync_data_from_s3 train
+.PHONY: all all_kenza_docker all_kenza_venv create_environment clean data delete_environment features lint requirements test_environment train
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -57,6 +57,11 @@ create_environment:
 	export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource $(shell which virtualenvwrapper.sh)\n"
 	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
+
+## Delete python interpreter environment
+delete_environment:
+	@bash -c "source `which virtualenvwrapper.sh`;rmvirtualenv $(PROJECT_NAME)"
+	@echo ">>>virtualenv $(PROJECT_NAME) is deleted"
 
 ## Test python environment is setup correctly
 test_environment:
